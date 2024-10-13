@@ -36,8 +36,7 @@ async def stats(inter:CommandInteraction, id:str=commands.Param(description="The
                 base_attack_wins = response["baseAttackWin"]
                 base_attack_draws = response["baseAttackDraw"]
                 base_attack_losses = response["baseAttackLoss"]
-                print(base_attack_wins, base_attack_draws, base_attack_losses)
-                fvba = f"{base_attack_wins}/{base_attack_draws}/{base_attack_losses}/{round((base_attack_wins/(base_attack_wins+base_attack_draws+base_attack_losses))*100, 2)}%"
+                fvba = f"{base_attack_wins}/{base_attack_draws}/{base_attack_losses}/{round((base_attack_wins/(base_attack_wins+base_attack_draws+base_attack_losses))*100, 2)}%/{round(base_attack_wins/base_attack_losses, 2)}"
             except KeyError:
                 base_attack_wins = 0
                 base_attack_draws = 0
@@ -50,7 +49,7 @@ async def stats(inter:CommandInteraction, id:str=commands.Param(description="The
                 base_defend_wins = response["baseDefenceWin"]
                 base_defend_draws = response["baseDefenceDraw"]
                 base_defend_losses = response["baseDefenceLoss"]
-                fvbd = f"{base_attack_wins}/{base_defend_draws}/{base_defend_losses}/{round((base_defend_wins/(base_defend_wins + base_defend_draws + base_defend_losses))*100, 2)}%"
+                fvbd = f"{base_attack_wins}/{base_defend_draws}/{base_defend_losses}/{round((base_defend_wins/(base_defend_wins + base_defend_draws + base_defend_losses))*100, 2)}%/{round(base_defend_wins/base_defend_losses, 2)}"
             except KeyError:
                 base_defend_wins = 0
                 base_attack_draws = 0
@@ -62,7 +61,7 @@ async def stats(inter:CommandInteraction, id:str=commands.Param(description="The
                 fleet_wins = response["fleetWin"]
                 fleet_draws = response["fleetDraw"]
                 fleet_losses = response["fleetLoss"]
-                fvf = f"{fleet_wins}/{fleet_draws}/{fleet_losses}/{round((fleet_wins/(fleet_wins+fleet_draws+fleet_losses))*100, 2)}%"
+                fvf = f"{fleet_wins}/{fleet_draws}/{fleet_losses}/{round((fleet_wins/(fleet_wins+fleet_draws+fleet_losses))*100, 2)}%/{round(fleet_wins/fleet_losses, 2)}"
             except KeyError:
                 fleet_wins = 0
                 fleet_draws = 0
@@ -102,9 +101,9 @@ async def stats(inter:CommandInteraction, id:str=commands.Param(description="The
     embed.add_field(name="** **", value="** **", inline=False)
     embed.add_field(name=":ringed_planet: Planet", value=planet, inline=True)
     embed.add_field(name=":sunny: Sector", value=sector, inline=True)
-    embed.add_field(name=":bomb: FVB (attacking) wins/draws/losses/wins%", value=fvba, inline=False)
-    embed.add_field(name=":shield: FVB (Defending) wins/draws/losses/win%", value=fvbd, inline=False)
-    embed.add_field(name=":crossed_swords: FVF wins/draws/losses/win%", value=fvf, inline=False)
+    embed.add_field(name=":bomb: FVB (attacking) wins/draws/losses/wins%/KD", value=fvba, inline=False)
+    embed.add_field(name=":shield: FVB (Defending) wins/draws/losses/win%/KD", value=fvbd, inline=False)
+    embed.add_field(name=":crossed_swords: FVF wins/draws/losses/win%/KD", value=fvf, inline=False)
     await inter.edit_original_message(embed=embed)
 
 
