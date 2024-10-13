@@ -85,7 +85,7 @@ async def stats(inter:CommandInteraction, id:str=commands.Param(description="The
                 planet = "N/A"
                 
             try:
-                last_seen = f"<t:{round(response["seen"]/1000)}:R>"
+                last_seen = f"<t:{round(response['seen']/1000)}:R>"
                 played_since = f"<t:{round(response['since']/1000)}:d>"
             except KeyError:
                 last_seen = "Unavailable"
